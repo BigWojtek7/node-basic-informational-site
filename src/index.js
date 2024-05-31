@@ -5,17 +5,13 @@ http
   .createServer((req, res) => {
     const q = new URL(`http://${req.headers.host}${req.url}`);
 
-
-
-
     const filename =
       q.pathname === "/" ? "./index.html" : `.${q.pathname}.html`;
 
-    
     fs.readFile(filename, (err, data) => {
       if (err) {
         res.writeHead(404, { "Content-Type": "text/html" });
-         const errorPage = fs.readFileSync('./404.html')
+        const errorPage = fs.readFileSync("./404.html");
         res.write(errorPage);
         return res.end();
       }
